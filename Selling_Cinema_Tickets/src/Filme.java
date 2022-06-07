@@ -1,46 +1,67 @@
 
 public class Filme extends Sessao {
-	//Atributos
-	private String nomeFilme;
-	private String idFilme;
-	private	int valorFilme;
 	
-	//Métodos 
-	private String getNomeFilme() {
+	private String nomeFilme;
+	private int idFilme;
+	private	double valorFilme;
+	private String tempoFilme;
+	private int classificacaoIdade;
+	//private Sessao[] sessoes;
+	
+	
+	public String getNomeFilme() {
 		return nomeFilme;
 	}
 	
-	private void setNomeFilme(String nomeFilme) {
+	public void setNomeFilme(String nomeFilme) {
 		this.nomeFilme = nomeFilme;
 	}
 	
-	private String getIdFilme() {
+	public int getIdFilme() {
 		return idFilme;
 	}
 	
-	private void setIdFilme(String idFilme) {
+	public void setIdFilme(int idFilme) {
 		this.idFilme = idFilme;
 	}
 	
-	private int getValorFilme() {
+	public double getValorFilme() {
 		return valorFilme;
 	}
 	
-	private void setValorFilme(int valorFilme) {
+	public void setValorFilme(double valorFilme) {
 		this.valorFilme = valorFilme;
 	}
 	
-	//Métodos 
-	public void adicionarFilme(String nomeFilme, String idFilme, int valorFilme) {
+	public String getTempoFilme() {
+		return tempoFilme;
+	}
+
+	public void setTempoFilme(String tempoFilme) {
+		this.tempoFilme = tempoFilme;
+	}
+
+	public int getClassificacaoIdade() {
+		return classificacaoIdade;
+	}
+
+	public void setClassificacaoIdade(int classificacaoIdade) {
+		this.classificacaoIdade = classificacaoIdade;
+	}
+	
+	
+	public void adicionarFilme(String nomeFilme, int idFilme, double valorFilme, 
+							   String tempoFilme, int classificaçãoIdade) {
 		setNomeFilme(nomeFilme);
 		setIdFilme(idFilme);
 		setValorFilme(valorFilme);
+		setTempoFilme(tempoFilme);
+		setClassificacaoIdade(classificaçãoIdade);
+		
 	}
 	
 	public String verFilme() {
-		String f = "Nome: " + this.getNomeFilme() +
-					"\nValor: " + this.getValorFilme() + " reais";
-		return f;
+		String informacoes = "Nome: " + this.getNomeFilme() + "\nValor: " + this.getValorFilme() + " reais";
+		return informacoes;
 	}
-	
 }
