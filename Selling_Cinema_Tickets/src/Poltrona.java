@@ -5,6 +5,13 @@ public class Poltrona {
 	private String numPoltrona;
 	private boolean statusPoltrona = false;
 	
+	public int getIdPoltrona() {
+		return idPoltrona;
+	}
+	
+	public void setIdPoltrona(int idPoltrona) {
+		this.idPoltrona = idPoltrona;
+	}
 	
 	public String getNumPoltrona() {
 		return numPoltrona;

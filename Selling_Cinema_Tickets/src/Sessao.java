@@ -1,34 +1,45 @@
 
 public class Sessao  {
 
-	private String idSessao;
-	private String diaSessao;
-	private String horaSessao;
+	private int idSessao;
+	private String data;
 	private String localDaSala;
-	private Poltrona[] poltronas;
 	
-	public String getIdSessao() {
+	//Para diminuir o codigo, vamos supor que todas as sessões tem o mesmo número de poltronas.
+	private Poltrona[] poltronas = new Poltrona[20];
+	
+	public Sessao() {
+		//criando poltronas
+		for (int i = 0; i<20; i++) {
+			Poltrona poltronaI = new Poltrona();
+			poltronaI.setIdPoltrona(i);
+			if (i<5) {
+				poltronaI.setNumPoltrona("A"+(i+1));
+			} else if(i<10 && i>=5) {
+				poltronaI.setNumPoltrona("B"+(i+1));
+			} else if(i<15 && i>=10) {
+				poltronaI.setNumPoltrona("C"+(i+1));
+			} else if(i<20 && i>=15) {
+				poltronaI.setNumPoltrona("D"+(i+1));
+			}
+			poltronas[i] = poltronaI;				
+		}
+	}
+	
+	public int getIdSessao() {
 		return idSessao;
 	}
 
-	public void setIdSessao(String idSessao) {
+	public void setIdSessao(int idSessao) {
 		this.idSessao = idSessao;
 	}
 
-	public String getDiaSessao() {
-		return diaSessao;
+	public String getData() {
+		return data;
 	}
 
-	public void setDiaSessao(String diaSessao) {
-		this.diaSessao = diaSessao;
-	}
-
-	public String getHoraSessao() {
-		return horaSessao;
-	}
-
-	public void setHoraSessao(String horaSessao) {
-		this.horaSessao = horaSessao;
+	public void setData(String data) {
+		this.data = data;
 	}
 	
 	public String getLocalDaSala() {
@@ -39,19 +50,23 @@ public class Sessao  {
 		this.localDaSala = localDaSala;
 	}
 	
-	//Métodos 
-	public void adicionarSessao(String idSessao, String diaSessao, String horaSessao) {
+	public void adicionarSessao(int idSessao, String data, String local) {
 		setIdSessao(idSessao);
-		setDiaSessao(diaSessao);
-		setHoraSessao(horaSessao);
+		setData(data);
+		setLocalDaSala(local);
+		
 	}
 	
+	
+	
+	
+	/*
 	public String verSessão() {
 		String s = "Sala: " + this.getIdSessao() +
 					"\nDia: " + this.getDiaSessao() +
 					"\nHora: " + this.getHoraSessao();
 		return s;
 		
-	}
+	}*/
 
 }

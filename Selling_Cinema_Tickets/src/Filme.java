@@ -6,7 +6,7 @@ public class Filme extends Sessao {
 	private	double valorFilme;
 	private String tempoFilme;
 	private int classificacaoIdade;
-	//private Sessao[] sessoes;
+	private Sessao[] sessoes = new Sessao[10];
 	
 	
 	public String getNomeFilme() {
@@ -51,12 +51,14 @@ public class Filme extends Sessao {
 	
 	
 	public void adicionarFilme(String nomeFilme, int idFilme, double valorFilme, 
-							   String tempoFilme, int classificaçãoIdade) {
+							   String tempoFilme, int classificaçãoIdade, Sessao[] sessoes) {
 		setNomeFilme(nomeFilme);
 		setIdFilme(idFilme);
 		setValorFilme(valorFilme);
 		setTempoFilme(tempoFilme);
 		setClassificacaoIdade(classificaçãoIdade);
+		//Cada filme deve receber uma lista de sessões e cada sessão deve ter uma lista de poltronas
+		
 		
 	}
 	
