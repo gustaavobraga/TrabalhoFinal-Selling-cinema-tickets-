@@ -41,7 +41,7 @@ public class Input {
 						return resposta;
 					}
 				}
-				System.out.println("Valor invalido, informe um número que seja valido.\n");
+				System.out.println("-Valor invalido, informe um número que seja valido.\n");
 		
 			} catch( InputMismatchException var) {
 				

@@ -49,7 +49,26 @@ public class Filme extends Sessao {
 		this.classificacaoIdade = classificacaoIdade;
 	}
 	
-	
+	public Sessao[] getSessoes() {
+		return sessoes;
+	}
+
+	public void setSessoes(Sessao[] sessoes) {
+		//Cada filme deve receber uma lista de sessões e cada sessão deve ter uma lista de poltronas
+		//For-each 
+		for (Sessao valor: sessoes) {
+			
+			loopInterno:
+			for (int i = 0; i < 10; i++) {
+				if (this.sessoes[i] == null) {
+					this.sessoes[i] = valor;
+					break loopInterno;
+				}
+			}
+		}
+		this.sessoes = sessoes;
+	}
+
 	public void adicionarFilme(String nomeFilme, int idFilme, double valorFilme, 
 							   String tempoFilme, int classificaçãoIdade, Sessao[] sessoes) {
 		setNomeFilme(nomeFilme);
@@ -57,8 +76,8 @@ public class Filme extends Sessao {
 		setValorFilme(valorFilme);
 		setTempoFilme(tempoFilme);
 		setClassificacaoIdade(classificaçãoIdade);
-		//Cada filme deve receber uma lista de sessões e cada sessão deve ter uma lista de poltronas
-		
+		setSessoes(sessoes);
+
 		
 	}
 	

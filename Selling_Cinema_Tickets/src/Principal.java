@@ -49,7 +49,7 @@ public class Principal {
 			{//Primeiro input. 
 				//A variavel opcoes contem os nomes que devem ser impressos para o usuário
 				String[] opcoes = {"Usuário","Administrador"};
-				String mensagem = "Olá, escolhar uma opção abaixo. \nE digite o número da opção:";
+				String mensagem = "-Olá, escolhar uma opção abaixo. \n-E digite o número da opção:";
 				resposta = input.inputInt(opcoes, 0, mensagem);
 			}
 			
@@ -58,24 +58,23 @@ public class Principal {
 				
 				{//Input que recebe o filme escolhido pelo user.
 					String[] opcoes = new String[0];
-					String mensagem = "Escolhar um dos filmes citadas acima. \nE digite o id do Filme:";
+					String mensagem = "-Escolhar um dos filmes citadas acima. \n-E digite o id do Filme:";
 					idFilmeEscolhido = input.inputInt(opcoes, quantidadeFilme, mensagem);
 				}
 				
 				//Vai retornar o nome do filme escolhido
 				String filmeEscolhido = cartaz.listarFilme(idFilmeEscolhido);
 				
-				System.out.println("Você escolheu o filme: ");
+				System.out.println("-Você escolheu o filme: ");
 				System.out.println("   " + filmeEscolhido + "\n");
 				
 				{//Input Continuar ou Cancelar
 					String[] opcoes = {"Detalhes do Filme \"" + filmeEscolhido+"\"","Voltar"};
-					String mensagem = "Escolhar uma opção abaixo:";
+					String mensagem = "-Escolhar uma opção abaixo:";
 					resposta = input.inputInt(opcoes, 0, mensagem);
 				}
 				
 				if (resposta == 1) {
-					System.out.println(idFilmeEscolhido);
 					cartaz.detalhesDoFilme(idFilmeEscolhido);
 					break;
 				} else {
