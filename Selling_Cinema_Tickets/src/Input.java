@@ -1,10 +1,11 @@
 import java.util.Scanner;
-import java.util.InputMismatchException; 
+import java.util.InputMismatchException;
+import java.util.Map; 
 
 public class Input {
 	Scanner ler = new Scanner(System.in);
 
-	public int inputInt(String[] opcoes,int quantidadeOpcoes , String mensagem) {
+	public int inputInt(String[] opcoes, int quantidadeOpcoes , String mensagem) {
 		/*
 		 *Esse método nem sempre vai precisar imprimir as opções, 
 		  pois as opções já foram impressas por outros métodos.
@@ -54,5 +55,24 @@ public class Input {
 		}
 	}
 	
+	public Integer inputStr(Map <String, Integer> nomeDasPoltronasLivres) {
+		String resposta = null;
+		
+		while(true) {
+			try {
+				resposta = ler.next().toUpperCase().trim();
+				
+				if (nomeDasPoltronasLivres.containsKey(resposta)) {
+					return nomeDasPoltronasLivres.get(resposta);
+				}
+				
+				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
+				return null;
+				
+			} catch( Exception var) {
+				System.out.println("Erro: " + var);
+			}
+		}
+	}
 }
 

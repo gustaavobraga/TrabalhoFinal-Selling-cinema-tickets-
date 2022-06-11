@@ -50,6 +50,10 @@ public class Sessao  {
 		this.localDaSala = localDaSala;
 	}
 	
+	public Poltrona[] getPoltronas() {
+		return poltronas;
+	}
+
 	public void adicionarSessao(int idSessao, String data, String local) {
 		setIdSessao(idSessao);
 		setData(data);
