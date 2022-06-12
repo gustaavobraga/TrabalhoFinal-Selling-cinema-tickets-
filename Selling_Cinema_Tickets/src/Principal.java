@@ -126,38 +126,143 @@ public class Principal {
 							
 							//IF Nº 4
 							if (respostaDoUser2 == 1) { //Continuar
+								Boolean finalizarCompra = false;
+								Integer idDaPoltrona = null;
+								System.out.println(finalizarCompra);
+								
 								
 								interno2:
 								while (true) {
-									System.out.println();
-									System.out.println("-Escolhar uma poltrona listada abaixo.\n-E digite o nome dela:");
+									if (finalizarCompra == false) {
+										System.out.println();
+										System.out.println("-Escolhar uma poltrona listada abaixo.\n-E digite o nome dela:");
+										
+										//key=numPoltrona e values=idPoltrona
+										Map <String, Integer> numDasPoltronasLivres = cartaz.listarPoltronasDoFilmeEscolhido();
+										idDaPoltrona = input.inputStr(numDasPoltronasLivres);
+									}
 									
-									Map <String, Integer> nomeDasPoltronasLivres = cartaz.listarPoltronasDoFilmeEscolhido();
-									Integer idDaPoltrona = input.inputStr(nomeDasPoltronasLivres);
 									
 									if (idDaPoltrona != null) {
-										cartaz.setDicPoltronasEscolhidas(idDaPoltrona);
-										cartaz.imprimirPoltronasEscolhidas();
-										
-										{//Input escolher mais uma poltrona ou finalizar comprar ou voltar para inicio
-											String[] opcoes = {"Finalizar Comprar", "Escolher outra poltrona", "Cancelar"};
-											String mensagem = "\n-Escolhar uma opção listada abaixo:";
-											resposta = input.inputInt(opcoes, 0, mensagem);
+										if (finalizarCompra == false) {
+											cartaz.setDicPoltronasEscolhidas(idDaPoltrona);
+											//OBS: Resolver bug das poltronas: Se a comprar for cancelar as poltronas escolhidas pelo cliente devem voltar ao estado anterior "false".
+											
+											cartaz.imprimirPoltronasEscolhidas();
+											
+											{//Input escolher mais uma poltrona ou finalizar comprar ou voltar para inicio
+												String[] opcoes = {"Finalizar Comprar", "Escolher outra poltrona", "Remover Poltrona Escolhida","Cancelar"};
+												String mensagem = "\n-Escolhar uma opção listada abaixo:";
+												resposta = input.inputInt(opcoes, 0, mensagem);
+											}
 										}
+										
 										
 										//IF Nº 5
 										if (resposta == 1) { //Finalizar Comprar
-											break interno2;
+											if(cartaz.sizeDePoltronasEscolhidas()>0) {
+												//Imprimir nota fiscal
+												
+												System.out.println("______________________________________");
+												System.out.println("                                                    ");
+												System.out.format("%38s","-------------Nota Fiscal--------------\n\n");
+												String[] dadosDaCompra = cartaz.dadosDaCompra();
+												
+												System.out.format("%-7s%31s\n","Filme: ",dadosDaCompra[0]);
+												System.out.format("%-10s%28s\n","Sessão: ",dadosDaCompra[1]);
+												System.out.format("%-11s%27s\n","Poltronas: ",dadosDaCompra[2]);
+												System.out.format("%-16s%22s\n\n\n\n","Valor Do Filme: ","R$ "+dadosDaCompra[3]);
+												System.out.format("%-10s%28s\n","Total: ","R$ "+dadosDaCompra[4]);
+												System.out.println("______________________________________");
+												
+												{//Input pagar compra ou cancelar compra
+													String[] opcoes = {"Pagar", "Cancelar compra"};
+													String mensagem = "\n-Escolhar uma opção listada abaixo:";
+													resposta = input.inputInt(opcoes, 0, mensagem);
+												}
+												if(resposta == 1) {//Pagar
+													System.out.println("Informe alguns dados, para podermos finalizar a compra.");
+													System.out.print("Nome Completo: ");
+													String nomeCliente = input.inputStrLogin();
+													System.out.print("Data de Nascimento: ");
+													String dataCliente = input.inputStrLogin();
+													System.out.print("CPF: ");
+													String cpfCliente = input.inputStrLogin();
+													
+													Cliente cliente1 = new Cliente(nomeCliente, cpfCliente, dataCliente);
+													
+													System.out.print("Número do Cartão de Crédito: ");
+													String numeroCartao = input.inputStrLogin();
+													System.out.print("Vencimento do Cartão de Crédito: ");
+													String vencimentoCartao = input.inputStrLogin();
+													System.out.print("CVV do Cartão de Crédito: ");
+													String cvvCartao = input.inputStrLogin();
+													
+													
+													System.out.println("Comprar realizada com sucesso");
+													
+													//Implementar funcionalidade de imprimir os tickets depois da compra ser efetuada
+													
+												} else if(resposta == 2) {//Cancelar compra
+													break interno;
+												}
+												
+												break interno2;
+											}else {
+												System.out.println("É preciso escolher uma poltrona para poder finalizar a compra.");
+												finalizarCompra = false;
+											}
+											
+											
 										} else if(resposta == 2) { //Escolher outra poltrona
 											//Não faz nada, deixa o loop interno2 roda de novo
-										} else if(resposta == 3) {//Cancelar
 											
+										} else if(resposta == 3) { //Remover Poltrona Escolhida
+											
+											interno3:
+											while(true) {
+												System.out.println();
+												cartaz.imprimirPoltronasEscolhidas();
+												System.out.println("-Das poltronas listadas acima. Escolhar uma para removela.\n-E digite o nome dela:");
+												
+												Map <String, Integer> numDasPoltronasEscolhidas = cartaz.numDasPoltronasEscolhidas();
+												idDaPoltrona = input.inputStr(numDasPoltronasEscolhidas);
+												
+												if(idDaPoltrona != null) {
+													cartaz.removerPoltronaEscolhida(idDaPoltrona);
+													
+													{//Input escolher mais uma poltrona ou finalizar comprar ou voltar para inicio
+														String[] opcoes = {"Finalizar Comprar", "Escolher outra poltrona", "Remover Outra Poltrona Escolhida","Cancelar"};
+														String mensagem = "\n-Escolhar uma opção listada abaixo:";
+														resposta = input.inputInt(opcoes, 0, mensagem);
+													}
+													if (resposta == 1) { //Finalizar Comprar
+														finalizarCompra = true;
+														resposta = 1;
+														break interno3;
+														
+													} else if(resposta == 2) { //Escolher outra poltrona
+														//Da break no loop interno3, e deixar o loop interno2 roda de novo
+														break interno3;
+														
+													} else if(resposta == 3) { //Remover outra Poltrona Escolhida
+														//Faz nada, deixar o loop interno3 roda de novo
+														
+													} else if(resposta == 4) {//Cancelar
+														break interno;
+													}
+												}
+											}
+											
+											
+										} else if(resposta == 4) {//Cancelar
+											break interno;
 										}
 										
 										
 									}
 								}
-								
+//								
 								break interno;
 							} else if(respostaDoUser2 == 2) { //Trocar Sessão
 								//Não faz nada e voltar para o começo do loop interno
@@ -179,7 +284,12 @@ public class Principal {
 				
 				
 			}else if (resposta == 2) {
-				
+				/*Implmentar Funcionalidades do administrador
+				 *  -Cadastrar Filme
+				 *  -Deletar Filme
+				 *  -Criar Sessões
+				 *  -Deletar Sessões
+				 */
 			}
 		
 		}

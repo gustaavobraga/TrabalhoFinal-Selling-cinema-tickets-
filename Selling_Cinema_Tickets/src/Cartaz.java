@@ -21,6 +21,8 @@ public class Cartaz {
 	 */ 
 	private Map <Integer, Integer> dicID = new HashMap<Integer,Integer>();
 	private Map <String, Integer> dicPoltronas = new HashMap<String, Integer>();
+	
+	//OBS:Resolver bud dos IDs das sessões: A impressao dos IDs das sessões tem o mesmo problema dos IDs dos filmes.
 	//Map <Integer, Integer> dicSessoes = new HashMap<Integer,Integer>();
 	
 	private Filme filmeEscolhido;
@@ -70,6 +72,21 @@ public class Cartaz {
 				i.setStatusPoltrona(true);
 			}
 		}	
+	}
+	
+	public Map<String, Integer> numDasPoltronasEscolhidas() {
+		Map<String, Integer> numDasPoltronas= new HashMap<String, Integer>();
+		
+		
+		for (Integer key: dicPoltronasEscolhidas.keySet()) {
+			String numPoltrona = dicPoltronasEscolhidas.get(key).getNumPoltrona();
+			int id = key;
+			
+			numDasPoltronas.put(numPoltrona, key);
+		}
+		
+		//key=numPoltrona e values=idPoltrona
+		return numDasPoltronas;
 	}
 
 	public void setFilmes(Filme filme) {
@@ -155,7 +172,6 @@ public class Cartaz {
 	public Map <String, Integer> listarPoltronasDoFilmeEscolhido() {
 		Poltrona[] listaDePoltronas = sessaoEscolhida.getPoltronas();
 		String[] xx = new String[5];
-		String[] nomeDasPoltronasLivres = new String[20];
 		int indice = 0;
 		
 		listaDePoltronas[3].setStatusPoltrona(true);
@@ -166,13 +182,15 @@ public class Cartaz {
 					xx[i] = listaDePoltronas[(indice + i)].getNumPoltrona();
 					interno:
 					for (int x=0; x<20; x++) {
-						String nome = listaDePoltronas[(indice + i)].getNumPoltrona();
+						String numPoltrona = listaDePoltronas[(indice + i)].getNumPoltrona();
 						int id = listaDePoltronas[(indice + i)].getIdPoltrona();
-						dicPoltronas.put(nome, id);
+						
+						dicPoltronas.put(numPoltrona, id);
 						break interno;
 					}
 					
 				} else {
+					//OBS: Imprimir o X com cor vermelha. 
 					xx[i] = "X";
 				}
 				
@@ -181,6 +199,7 @@ public class Cartaz {
 			
 			indice += 5;
 			if (indice == 20) {
+				//Retorna um dicionario onde a key=numPoltrona e o values=idPoltrona
 				return dicPoltronas;
 			}
 		}
@@ -194,6 +213,41 @@ public class Cartaz {
             System.out.print("-" + poltrona.getNumPoltrona() + " ");
 		}
 		System.out.println();
+	}
+	
+	public void removerPoltronaEscolhida(int idPoltrona) {
+		dicPoltronasEscolhidas.get(idPoltrona).setStatusPoltrona(false);
+		dicPoltronasEscolhidas.remove(idPoltrona);
+	}
+	
+	public int sizeDePoltronasEscolhidas() {
+		return dicPoltronasEscolhidas.size();
+	}
+	
+	public String[] dadosDaCompra() {
+		String[] dados = new String[5];
+		String nomeFilme = filmeEscolhido.getNomeFilme();
+		String sessao = sessaoEscolhida.getData();
+		String valorDoFilme = String.format("%.2f", filmeEscolhido.getValorFilme());
+		int sizePoltronas = dicPoltronasEscolhidas.size();
+		String valorTotal = String.format("%.2f", (sizePoltronas * filmeEscolhido.getValorFilme()));
+		
+		
+		String poltronasEscolhidas = " ";
+		for (Integer key: dicPoltronasEscolhidas.keySet()) {
+			String numPoltrona = dicPoltronasEscolhidas.get(key).getNumPoltrona();
+			poltronasEscolhidas = poltronasEscolhidas.concat("  ");
+			poltronasEscolhidas = poltronasEscolhidas.concat(numPoltrona);
+			
+		}
+		
+		dados[0] = nomeFilme;
+		dados[1] = sessao;
+		dados[2] = poltronasEscolhidas;
+		dados[3] = valorDoFilme;
+		dados[4] = valorTotal;
+		
+		return dados;
 	}
 }
 

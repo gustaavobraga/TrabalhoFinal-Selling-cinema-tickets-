@@ -55,15 +55,17 @@ public class Input {
 		}
 	}
 	
-	public Integer inputStr(Map <String, Integer> nomeDasPoltronasLivres) {
+	public Integer inputStr(Map <String, Integer> numDasPoltronasLivres) {
+		//O parametro recebe uma key=numPoltrona e values=idPoltrona
 		String resposta = null;
 		
 		while(true) {
 			try {
 				resposta = ler.next().toUpperCase().trim();
 				
-				if (nomeDasPoltronasLivres.containsKey(resposta)) {
-					return nomeDasPoltronasLivres.get(resposta);
+				if (numDasPoltronasLivres.containsKey(resposta)) {
+					//retorna o id da poltrona escolhida
+					return numDasPoltronasLivres.get(resposta);
 				}
 				
 				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
@@ -71,6 +73,19 @@ public class Input {
 				
 			} catch( Exception var) {
 				System.out.println("Erro: " + var);
+			}
+		}
+	}
+	
+	public String inputStrLogin() {
+		while(true) {
+			try {
+				String resposta = ler.next().toUpperCase().trim();
+				
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
 			}
 		}
 	}

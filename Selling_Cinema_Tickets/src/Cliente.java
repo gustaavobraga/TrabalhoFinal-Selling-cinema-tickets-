@@ -4,7 +4,7 @@ public class Cliente {
 	private String nomeCliente;
 	private String cpf;
 	private String dataNacsimento;
-	private String email;
+
 
 	
 	public Cliente(String nome, String cpf, String dataNacsimento) {
@@ -36,14 +36,5 @@ public class Cliente {
 	public void setNascCliente(String dataNacsimento) {
 		this.dataNacsimento = dataNacsimento;
 	}
-	
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 
 }
