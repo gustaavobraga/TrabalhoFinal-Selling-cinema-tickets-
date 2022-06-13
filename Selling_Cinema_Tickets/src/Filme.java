@@ -54,7 +54,7 @@ public class Filme extends Sessao {
 	}
 
 	public void setSessoes(Sessao[] sessoes) {
-		//Cada filme deve receber uma lista de sessões e cada sessão deve ter uma lista de poltronas
+		//Cada filme deve receber uma lista de sessoes e cada sessao deve ter uma lista de poltronas
 		//For-each 
 		for (Sessao valor: sessoes) {
 			

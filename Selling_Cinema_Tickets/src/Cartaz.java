@@ -4,25 +4,25 @@ import java.util.Map;
 public class Cartaz {
 	private Filme[] filmes = new Filme[25];
 	/* Obs:
-	 * Os IDs dos filmes nem sempre vão está em uma ordem contínua
-	   pois ao deletar um filme vai surgir uma descontinuidade até 
-	   que a posição seja preenchida novamente com outro filme.
-	 * Logo NÃO vamos imprimir essa bagunça de IDs para o usuário.
-	 * Para resolver esse problema vamos criar novos IDs temporários.
-	 * Para isso vamos criar um dicionário onde as KEYs desse 
-	   dicionário vão ser os novos IDs que vão ser IMPRESSOS
-	   para o usuário, e os valores do dicionário vão ser os IDs
-	   (bagunçados) originais dos filmes.
-	 * Toda vez que o método  listarFilmes() for chamado, ele vai 
-	   apagar todos os valores do dicionário e vai criar novos 
-	   IDs para o dicionário.
-	 * Dessa forma a impressão dos IDs vai ficar atualizada mesmo 
+	 * Os IDs dos filmes nem sempre vao esta em uma ordem continua
+	   pois ao deletar um filme vai surgir uma descontinuidade ate 
+	   que a posicao seja preenchida novamente com outro filme.
+	 * Logo NaO vamos imprimir essa bagunca de IDs para o usuario.
+	 * Para resolver esse problema vamos criar novos IDs temporarios.
+	 * Para isso vamos criar um dicionario onde as KEYs desse 
+	   dicionario vao ser os novos IDs que vao ser IMPRESSOS
+	   para o usuario, e os valores do dicionario vao ser os IDs
+	   (baguncados) originais dos filmes.
+	 * Toda vez que o metodo  listarFilmes() for chamado, ele vai 
+	   apagar todos os valores do dicionario e vai criar novos 
+	   IDs para o dicionario.
+	 * Dessa forma a impressao dos IDs vai ficar atualizada mesmo 
 	   se um filme for deletado.
 	 */ 
 	private Map <Integer, Integer> dicID = new HashMap<Integer,Integer>();
 	private Map <String, Integer> dicPoltronas = new HashMap<String, Integer>();
 	
-	//OBS:Resolver bud dos IDs das sessões: A impressao dos IDs das sessões tem o mesmo problema dos IDs dos filmes.
+	//OBS:Resolver bud dos IDs das sessoes: A impressao dos IDs das sessoes tem o mesmo problema dos IDs dos filmes.
 	//Map <Integer, Integer> dicSessoes = new HashMap<Integer,Integer>();
 	
 	private Filme filmeEscolhido;
@@ -40,8 +40,8 @@ public class Cartaz {
 	}
 
 	public void setFilmeEscolhido(int idFilme) {
-		//O idFilme passado como paramentro, na verdade é uma key do 
-		//dicionario dic, onde seu valor é o verdadeiro id do filme.
+		//O idFilme passado como paramentro, na verdade e uma key do 
+		//dicionario dic, onde seu valor e o verdadeiro id do filme.
 		int idOriginalDoFilme = dicID.get(idFilme);
 		
 		for (int i = 0; i < 25; i++) {
@@ -99,7 +99,7 @@ public class Cartaz {
 		}
 	}
 	
-	//Lista todos os filmes que estão em cartaz
+	//Lista todos os filmes que estao em cartaz
 	public int listarFilmes() {
 		dicID.clear();
 		dicPoltronas.clear();
@@ -109,7 +109,7 @@ public class Cartaz {
 		System.out.println("____________________________________________________");
 		System.out.println("                                                    ");
 		System.out.format("%52s","------------------Filmes em Cartaz------------------\n \n");
-		System.out.format(" %-4s%-25s%-6s%-14s \n \n","ID","Nome","Tempo","Classificação");
+		System.out.format(" %-4s%-25s%-6s%-14s \n \n","ID","Nome","Tempo","Classificacao");
 		
 		for (int i = 0; i < 25; i++) {
 			if (filmes[i] != null) {
@@ -127,11 +127,11 @@ public class Cartaz {
 		
 		System.out.println("____________________________________________________\n");
 		
-		//Esse valor int retornado é para o método inputInt() saber quais valores ele deve esperar do usuário
+		//Esse valor int retornado e para o metodo inputInt() saber quais valores ele deve esperar do usuario
 		return quantidadeFilme;
 	}
 
-	//Lista um único filme
+	//Lista um unico filme
 	public String listarFilme() {
 		String dadosDoFilme = filmeEscolhido.getNomeFilme();
 		return dadosDoFilme;
@@ -143,10 +143,10 @@ public class Cartaz {
 		System.out.format("%52s","------------------Detalhes do Filme-----------------\n \n");
 					
 		System.out.format("%s%-20s\n", "-Nome: ", filmeEscolhido.getNomeFilme());
-		System.out.format("%s%-20s\n", "-Idade mínima: ", filmeEscolhido.getClassificacaoIdade());
+		System.out.format("%s%-20s\n", "-Idade minima: ", filmeEscolhido.getClassificacaoIdade());
 		System.out.format("%s%-20s\n", "-Tempo: ", filmeEscolhido.getTempoFilme());
 		System.out.format("%s%-20s\n", "-Valor: ", filmeEscolhido.getValorFilme());
-		System.out.println("-Sessões disponpiveis:");
+		System.out.println("-Sessoes disponpiveis:");
 		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
 		for (Sessao ses: listaDeSessoes) {
 			System.out.println( "    " + ses.getIdSessao() +"  "+ ses.getData());
@@ -159,7 +159,7 @@ public class Cartaz {
 		
 		System.out.println("____________________________________________________");
 		System.out.println("                                                    ");
-		System.out.format("%52s","------------------Lista de Sessões------------------\n \n");
+		System.out.format("%52s","------------------Lista de Sessoes------------------\n \n");
 					
 		for (Sessao ses: listaDeSessoes) {
 			System.out.println( "    " + ses.getIdSessao() +".  "+ ses.getData());
@@ -190,7 +190,7 @@ public class Cartaz {
 					}
 					
 				} else {
-					//OBS: Imprimir o X com cor vermelha. 
+					//OBS: Imprimir o X com cor. 
 					xx[i] = "X";
 				}
 				
@@ -206,7 +206,7 @@ public class Cartaz {
 	}
 	
 	public void imprimirPoltronasEscolhidas() {
-		System.out.println("\nSuas poltronas escolhidas para o filme \""+ filmeEscolhido.getNomeFilme() +"\" são:");
+		System.out.println("\nSuas poltronas escolhidas para o filme \""+ filmeEscolhido.getNomeFilme() +"\" sao:");
 		System.out.print("  ");
 		for (Integer key : dicPoltronasEscolhidas.keySet()) {
             Poltrona poltrona = dicPoltronasEscolhidas.get(key);

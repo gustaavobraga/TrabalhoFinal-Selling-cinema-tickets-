@@ -7,11 +7,11 @@ public class Input {
 
 	public int inputInt(String[] opcoes, int quantidadeOpcoes , String mensagem) {
 		/*
-		 *Esse método nem sempre vai precisar imprimir as opções, 
-		  pois as opções já foram impressas por outros métodos.
-		 *Quando for este o caso, o método deve receber um array de tamanho 0, e
-		  o quantidade de opções que foram impressas para o usuário.
-		 *E deve mudar o primeiro print, de "opção abaixo" para "opção citadas acima"   
+		 *Esse metodo nem sempre vai precisar imprimir as opcoes, 
+		  pois as opcoes ja foram impressas por outros metodos.
+		 *Quando for este o caso, o metodo deve receber um array de tamanho 0, e
+		  o quantidade de opcoes que foram impressas para o usuario.
+		 *E deve mudar o primeiro print, de "opcao abaixo" para "opcao citadas acima"   
 		 */
 		
 		int resposta;
@@ -36,13 +36,13 @@ public class Input {
 			try {
 				resposta = ler.nextInt();
 				
-				//Verifica se valor passado corresponde a algum valor das opções
+				//Verifica se valor passado corresponde a algum valor das opcoes
 				for (int i=0; i < numDeOpcoes; i++) {
 					if (resposta == (i+1)) {
 						return resposta;
 					}
 				}
-				System.out.println("-Valor invalido, informe um número que seja valido.\n");
+				System.out.println("-Valor invalido, informe um numero que seja valido.\n");
 		
 			} catch( InputMismatchException var) {
 				

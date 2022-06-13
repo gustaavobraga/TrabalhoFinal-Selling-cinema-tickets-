@@ -5,7 +5,7 @@ public class Sessao  {
 	private String data;
 	private String localDaSala;
 	
-	//Para diminuir o codigo, vamos supor que todas as sessões tem o mesmo número de poltronas.
+	//Para diminuir o codigo, vamos supor que todas as sessões tem o mesmo numero de poltronas.
 	private Poltrona[] poltronas = new Poltrona[20];
 	
 	public Sessao() {
@@ -60,17 +60,5 @@ public class Sessao  {
 		setLocalDaSala(local);
 		
 	}
-	
-	
-	
-	
-	/*
-	public String verSessão() {
-		String s = "Sala: " + this.getIdSessao() +
-					"\nDia: " + this.getDiaSessao() +
-					"\nHora: " + this.getHoraSessao();
-		return s;
-		
-	}*/
 
 }

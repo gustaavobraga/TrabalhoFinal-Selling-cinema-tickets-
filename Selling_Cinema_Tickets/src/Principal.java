@@ -29,14 +29,14 @@ public class Principal {
 		Sessao[] listaDeSessoes = {sessao1, sessao2, sessao3, sessao4}; 
 
 		
-		/*Valor esperado pelo método:
+		/*Valor esperado pelo metodo:
 		 *
 		 *adicionarFilme(
 		 * 		int idFilme,
 		 * 		String nomeFilme,  
 		 * 		double valorFilme, 
 		 * 		String tempoFilme, 
-		 * 		int classificaçãoIdade,
+		 * 		int classificacaoIdade,
 		 * 		Sessao[] sessoes
 		 */
 		
@@ -58,7 +58,7 @@ public class Principal {
 			int resposta;
 			int idFilmeEscolhido;
 			
-			//Nome da aplicação
+			//Nome da aplicacao
 			System.out.println("____________________________________________________");
 			System.out.println("                                                    ");
 			System.out.format("%40s" , "Venda de Tickets Para Cinema\n");
@@ -67,7 +67,7 @@ public class Principal {
 			{//Primeiro input. 
 				//A variavel opcoes contem os nomes que devem ser impressos para o usuário
 				String[] opcoes = {"Cliente","Administrador"};
-				String mensagem = "-Olá, escolhar uma opção abaixo. \n-E digite o número da opção:";
+				String mensagem = "-Ola, escolhar uma opcao abaixo. \n-E digite o numero da opcao:";
 				resposta = input.inputInt(opcoes, 0, mensagem);
 			}
 			
@@ -85,12 +85,12 @@ public class Principal {
 				//Vai retornar o nome do filme escolhido
 				String filmeEscolhido = cartaz.listarFilme();
 				
-				System.out.println("\n-Você escolheu o filme: ");
+				System.out.println("\n-Voce escolheu o filme: ");
 				System.out.println("   " + filmeEscolhido + "\n");
 				
 				{//Input lista detalhes do filme ou Voltar para o inicio
 					String[] opcoes = {"Detalhes do Filme \"" + filmeEscolhido+"\"","Voltar"};
-					String mensagem = "-Escolhar uma opção abaixo. \n-E digite o número da opção:";
+					String mensagem = "-Escolhar uma opcao abaixo. \n-E digite o numero da opcao:";
 					resposta = input.inputInt(opcoes, 0, mensagem);
 				}
 				
@@ -100,7 +100,7 @@ public class Principal {
 					
 					{//Input Comprar ingresso ou Voltar para o inicio
 						String[] opcoes = {"Comprar ingresso","Cancelar"};
-						String mensagem = "-Escolhar uma opção abaixo. \n-E digite o número da opção:";
+						String mensagem = "-Escolhar uma opcao abaixo. \n-E digite o numero da opcao:";
 						resposta = input.inputInt(opcoes, 0, mensagem);
 					}
 					
@@ -111,16 +111,16 @@ public class Principal {
 							int respostaDoUser2;
 							int numDeSessoes = cartaz.listarSessoesDoFilmeEscolhido();
 							
-							{//Input escolher sessão
+							{//Input escolher sessao
 								String[] opcoes = new String[0];
-								String mensagem = "-Escolhar uma sessão listada acima. \n-E digite o número da opção:";
+								String mensagem = "-Escolhar uma sessao listada acima. \n-E digite o numero da opcao:";
 								resposta = input.inputInt(opcoes, numDeSessoes, mensagem);
 								cartaz.setSessaoEscolhida(resposta);
 							}
 							
-							{//Input continuar ou trocar sessão ou voltar para inicio
-								String[] opcoes = {"Continuar", "Trocar Sessão", "Cancelar"};
-								String mensagem = "\n-Escolhar uma opção listada abaixo:";
+							{//Input continuar ou trocar sessao ou voltar para inicio
+								String[] opcoes = {"Continuar", "Trocar Sessao", "Cancelar"};
+								String mensagem = "\n-Escolhar uma opcao listada abaixo:";
 								respostaDoUser2 = input.inputInt(opcoes, 0, mensagem);
 							}
 							
@@ -152,7 +152,7 @@ public class Principal {
 											
 											{//Input escolher mais uma poltrona ou finalizar comprar ou voltar para inicio
 												String[] opcoes = {"Finalizar Comprar", "Escolher outra poltrona", "Remover Poltrona Escolhida","Cancelar"};
-												String mensagem = "\n-Escolhar uma opção listada abaixo:";
+												String mensagem = "\n-Escolhar uma opcao listada abaixo:";
 												resposta = input.inputInt(opcoes, 0, mensagem);
 											}
 										}
@@ -169,7 +169,7 @@ public class Principal {
 												String[] dadosDaCompra = cartaz.dadosDaCompra();
 												
 												System.out.format("%-7s%31s\n","Filme: ",dadosDaCompra[0]);
-												System.out.format("%-10s%28s\n","Sessão: ",dadosDaCompra[1]);
+												System.out.format("%-10s%28s\n","Sessao: ",dadosDaCompra[1]);
 												System.out.format("%-11s%27s\n","Poltronas: ",dadosDaCompra[2]);
 												System.out.format("%-16s%22s\n\n\n\n","Valor Do Filme: ","R$ "+dadosDaCompra[3]);
 												System.out.format("%-10s%28s\n","Total: ","R$ "+dadosDaCompra[4]);
@@ -177,7 +177,7 @@ public class Principal {
 												
 												{//Input pagar compra ou cancelar compra
 													String[] opcoes = {"Pagar", "Cancelar compra"};
-													String mensagem = "\n-Escolhar uma opção listada abaixo:";
+													String mensagem = "\n-Escolhar uma opcao listada abaixo:";
 													resposta = input.inputInt(opcoes, 0, mensagem);
 												}
 												if(resposta == 1) {//Pagar
@@ -191,11 +191,11 @@ public class Principal {
 													
 													Cliente cliente1 = new Cliente(nomeCliente, cpfCliente, dataCliente);
 													
-													System.out.print("Número do Cartão de Crédito: ");
+													System.out.print("Numero do Cartao de Credito: ");
 													String numeroCartao = input.inputStrLogin();
-													System.out.print("Vencimento do Cartão de Crédito: ");
+													System.out.print("Vencimento do Cartao de Credito: ");
 													String vencimentoCartao = input.inputStrLogin();
-													System.out.print("CVV do Cartão de Crédito: ");
+													System.out.print("CVV do Cartao de Credito: ");
 													String cvvCartao = input.inputStrLogin();
 													
 													
@@ -209,13 +209,13 @@ public class Principal {
 												
 												break interno2;
 											}else {
-												System.out.println("É preciso escolher uma poltrona para poder finalizar a compra.");
+												System.out.println("e preciso escolher uma poltrona para poder finalizar a compra.");
 												finalizarCompra = false;
 											}
 											
 											
 										} else if(resposta == 2) { //Escolher outra poltrona
-											//Não faz nada, deixa o loop interno2 roda de novo
+											//Nao faz nada, deixa o loop interno2 roda de novo
 											
 										} else if(resposta == 3) { //Remover Poltrona Escolhida
 											
@@ -233,7 +233,7 @@ public class Principal {
 													
 													{//Input escolher mais uma poltrona ou finalizar comprar ou voltar para inicio
 														String[] opcoes = {"Finalizar Comprar", "Escolher outra poltrona", "Remover Outra Poltrona Escolhida","Cancelar"};
-														String mensagem = "\n-Escolhar uma opção listada abaixo:";
+														String mensagem = "\n-Escolhar uma opcao listada abaixo:";
 														resposta = input.inputInt(opcoes, 0, mensagem);
 													}
 													if (resposta == 1) { //Finalizar Comprar
@@ -264,22 +264,22 @@ public class Principal {
 								}
 //								
 								break interno;
-							} else if(respostaDoUser2 == 2) { //Trocar Sessão
-								//Não faz nada e voltar para o começo do loop interno
+							} else if(respostaDoUser2 == 2) { //Trocar Sessao
+								//Nao faz nada e voltar para o comeco do loop interno
 							
 							} else if(respostaDoUser2 == 3) { //Cancelar
-								//Da brack no loop interno e voltar para o começo do loop externo
+								//Da brack no loop interno e voltar para o comeco do loop externo
 								break interno;
 							}
 						}
 						
 						
 					} else if (resposta == 2){
-						//Não faz nada e voltar para o começo do loop
+						//Nao faz nada e voltar para o comeco do loop
 					}
 				
 				} else if (resposta == 2){
-					//Não faz nada e voltar para o começo do loop
+					//Nao faz nada e voltar para o comeco do loop
 				}
 				
 				
@@ -287,8 +287,8 @@ public class Principal {
 				/*Implmentar Funcionalidades do administrador
 				 *  -Cadastrar Filme
 				 *  -Deletar Filme
-				 *  -Criar Sessões
-				 *  -Deletar Sessões
+				 *  -Criar Sessoes
+				 *  -Deletar Sessoes
 				 */
 			}
 		
