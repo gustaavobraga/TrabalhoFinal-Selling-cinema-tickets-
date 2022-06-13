@@ -1,5 +1,5 @@
 # Compiled class file
-*.class
+/bim/*.class
 
 # Log file
 *.log
@@ -23,15 +23,9 @@
 hs_err_pid*
 /bin/
 
-.settings/
+/.settings/
 bin/
 tmp/
-.metadata/
-.classpath
-.project
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.loadpath
+*.metadata
+*.classpath
+*.project
