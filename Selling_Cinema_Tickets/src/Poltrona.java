@@ -29,7 +29,7 @@ public class Poltrona {
 		this.statusPoltrona = statusPoltrona;
 	}
 	
-	//Métodos
+	//Metodos
 	public void adicionarPoltrona(String numPoltrona, boolean statusPoltrona) {
 		this.numPoltrona = numPoltrona;
 		boolean
