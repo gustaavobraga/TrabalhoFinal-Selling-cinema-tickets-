@@ -1,47 +1,63 @@
 
 public class Sessao  {
-	//Atributos
-	private String idSessão;
-	private String diaSessão;
-	private String horaSessão;
+
+	private int idSessao;
+	private String data;
+	private String localDaSala;
 	
-	//Métodos
-	private String getIdSessão() {
-		return idSessão;
-	}
-
-	private void setIdSessão(String idSessão) {
-		this.idSessão = idSessão;
-	}
-
-	private String getDiaSessão() {
-		return diaSessão;
-	}
-
-	private void setDiaSessão(String diaSessão) {
-		this.diaSessão = diaSessão;
-	}
-
-	private String getHoraSessão() {
-		return horaSessão;
-	}
-
-	private void setHoraSessão(String horaSessão) {
-		this.horaSessão = horaSessão;
+	//Para diminuir o codigo, vamos supor que todas as sessões tem o mesmo numero de poltronas.
+	private Poltrona[] poltronas = new Poltrona[20];
+	
+	public Sessao() {
+		//criando poltronas
+		for (int i = 0; i<20; i++) {
+			Poltrona poltronaI = new Poltrona();
+			poltronaI.setIdPoltrona(i);
+			if (i<5) {
+				poltronaI.setNumPoltrona("A"+(i+1));
+			} else if(i<10 && i>=5) {
+				poltronaI.setNumPoltrona("B"+(i+1));
+			} else if(i<15 && i>=10) {
+				poltronaI.setNumPoltrona("C"+(i+1));
+			} else if(i<20 && i>=15) {
+				poltronaI.setNumPoltrona("D"+(i+1));
+			}
+			poltronas[i] = poltronaI;				
+		}
 	}
 	
-	//Métodos 
-	public void adicionarSessão(String idSessão, String diaSessão, String horaSessão) {
-		setIdSessão(idSessão);
-		setDiaSessão(diaSessão);
-		setHoraSessão(horaSessão);
+	public int getIdSessao() {
+		return idSessao;
+	}
+
+	public void setIdSessao(int idSessao) {
+		this.idSessao = idSessao;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}
 	
-	public String verSessão() {
-		String s = "Sala: " + this.getIdSessão() +
-					"\nDia: " + this.getDiaSessão() +
-					"\nHora: " + this.getHoraSessão();
-		return s;
+	public String getLocalDaSala() {
+		return localDaSala;
+	}
+
+	public void setLocalDaSala(String localDaSala) {
+		this.localDaSala = localDaSala;
+	}
+	
+	public Poltrona[] getPoltronas() {
+		return poltronas;
+	}
+
+	public void adicionarSessao(int idSessao, String data, String local) {
+		setIdSessao(idSessao);
+		setData(data);
+		setLocalDaSala(local);
 		
 	}
 

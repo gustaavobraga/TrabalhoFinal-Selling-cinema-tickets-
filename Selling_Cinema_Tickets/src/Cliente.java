@@ -1,15 +1,16 @@
 
 public class Cliente {
-	//Atributos
+	
 	private String nomeCliente;
-	private String cpfCliente;
-	private String nascCliente;
-		
-	//Métodos
-	public Cliente(String noCli, String cpf, String nascCli) {
-		this.nomeCliente = noCli;
-		this.cpfCliente = cpf;
-		this.nascCliente = nascCli;
+	private String cpf;
+	private String dataNacsimento;
+
+
+	
+	public Cliente(String nome, String cpf, String dataNacsimento) {
+		this.nomeCliente = nome;
+		this.cpf = cpf;
+		this.dataNacsimento = dataNacsimento;
 	}
 	
 	public String getNomeCliente() {
@@ -20,23 +21,20 @@ public class Cliente {
 		this.nomeCliente = nomeCliente;
 	}
 	
-	public String getCpfCliente() {
-		return cpfCliente;
+	public String getCpf() {
+		return cpf;
 	}
 	
-	public void setCpfCliente(String cpfCliente) {
-		this.cpfCliente = cpfCliente;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 	
 	public String getNascCliente() {
-		return nascCliente;
+		return dataNacsimento;
 	}
 	
-	public void setNascCliente(String nascCliente) {
-		this.nascCliente = nascCliente;
+	public void setNascCliente(String dataNacsimento) {
+		this.dataNacsimento = dataNacsimento;
 	}
-	
-	
-
 
 }

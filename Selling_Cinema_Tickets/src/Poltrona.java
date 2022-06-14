@@ -1,23 +1,31 @@
 
 public class Poltrona {
-	//Atributos
-	private String numPoltrona;
-	private boolean statusPoltrona;
 	
-	//Métodos
-	private String getNumPoltrona() {
+	private int idPoltrona;
+	private String numPoltrona;
+	private boolean statusPoltrona = false;
+	
+	public int getIdPoltrona() {
+		return idPoltrona;
+	}
+	
+	public void setIdPoltrona(int idPoltrona) {
+		this.idPoltrona = idPoltrona;
+	}
+	
+	public String getNumPoltrona() {
 		return numPoltrona;
 	}
 	
-	private void setNumPoltrona(String numPoltrona) {
+	public void setNumPoltrona(String numPoltrona) {
 		this.numPoltrona = numPoltrona;
 	}
 	
-	private boolean getStatusPoltrona() {
+	public boolean getStatusPoltrona() {
 		return statusPoltrona;
 	}
 	
-	private void setStatusPoltrona(boolean statusPoltrona) {
+	public void setStatusPoltrona(boolean statusPoltrona) {
 		this.statusPoltrona = statusPoltrona;
 	}
 	
@@ -35,7 +43,5 @@ public class Poltrona {
 				   " \n[b1] [b2] [b3] [b4] [b5] " +
 				   " \n[c1] [c2] [c3] [c4] [c5] " ;
 		return p;
-	}
-	
-	
+	}	
 }
