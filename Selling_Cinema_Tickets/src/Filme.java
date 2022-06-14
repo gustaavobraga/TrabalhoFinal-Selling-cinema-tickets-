@@ -70,12 +70,12 @@ public class Filme extends Sessao {
 	}
 
 	public void adicionarFilme(int idFilme, String nomeFilme,  double valorFilme, 
-							   String tempoFilme, int classificaçãoIdade, Sessao[] sessoes) {
+							   String tempoFilme, int classificacaoIdade, Sessao[] sessoes) {
 		setNomeFilme(nomeFilme);
 		setIdFilme(idFilme);
 		setValorFilme(valorFilme);
 		setTempoFilme(tempoFilme);
-		setClassificacaoIdade(classificaçãoIdade);
+		setClassificacaoIdade(classificacaoIdade);
 		setSessoes(sessoes);
 
 		
