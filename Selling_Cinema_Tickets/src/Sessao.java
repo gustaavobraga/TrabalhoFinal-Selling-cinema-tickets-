@@ -4,6 +4,7 @@ public class Sessao  {
 	private int idSessao;
 	private String data;
 	private String localDaSala;
+	private int idFilme;
 	
 	//Para diminuir o codigo, vamos supor que todas as sessões tem o mesmo numero de poltronas.
 	private Poltrona[] poltronas = new Poltrona[20];
@@ -50,6 +51,14 @@ public class Sessao  {
 		this.localDaSala = localDaSala;
 	}
 	
+	public int getIdFilme() {
+		return idFilme;
+	}
+
+	public void setIdFilme(int idFilme) {
+		this.idFilme = idFilme;
+	}
+
 	public Poltrona[] getPoltronas() {
 		return poltronas;
 	}
@@ -58,6 +67,14 @@ public class Sessao  {
 		setIdSessao(idSessao);
 		setData(data);
 		setLocalDaSala(local);
+		
+	}
+	
+	public void adicionarSessao(int idSessao, String data, String local, int idFilme) {
+		setIdSessao(idSessao);
+		setData(data);
+		setLocalDaSala(local);
+		setIdFilme(idFilme);
 		
 	}
 
