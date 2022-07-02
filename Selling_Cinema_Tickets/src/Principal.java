@@ -44,7 +44,7 @@ public class Principal {
 					System.out.println("____________________________________________________\n");
 					
 					{//Primeiro input. 
-						//A variavel opcoes contem os nomes que devem ser impressos para o usuário
+						//A variavel opcoes contem os nomes que devem ser impressos para o usuario
 						String[] opcoes = {"Cliente","Administrador","Cadastrar Administrador"};
 						String mensagem = "-Ola, escolhar uma opcao abaixo. \n-E digite o numero da opcao:";
 						resposta = input.inputInt(opcoes, 0, mensagem);
@@ -364,7 +364,7 @@ public class Principal {
 						System.out.println("____________________________________________________");
 						
 						{//Primeiro input do ADD 
-							//A variavel opcoes contem os nomes que devem ser impressos para o usuário
+							//A variavel opcoes contem os nomes que devem ser impressos para o usuario
 							String[] opcoes = {"Cadastrar Filme", "Deletar Filme", "Cadastrar Sessao", "Deletar Sessao"};
 							String mensagem = "\n-Escolha uma das opcoes abaixo. \n-E digite o numero da opcao: ";
 							resposta = input.inputInt(opcoes, 0, mensagem);
