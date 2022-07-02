@@ -28,4 +28,10 @@ public class Poltrona {
 	public void setStatusPoltrona(boolean statusPoltrona) {
 		this.statusPoltrona = statusPoltrona;
 	}	
+	
+	public void adicionarPoltrona(int idPoltrona, String numPoltrona) {
+		this.idPoltrona = idPoltrona;
+		this.numPoltrona = numPoltrona;
+		this.statusPoltrona = true;
+	}
 }

@@ -28,7 +28,16 @@ public class Cartaz {
 	
 	private Filme filmeEscolhido;
 	private Sessao sessaoEscolhida;
+	private int sizeSessaoDoFilmeEscolhido;
 	
+	public int getSizeSessaoDoFilmeEscolhido() {
+		return sizeSessaoDoFilmeEscolhido;
+	}
+
+	public void setSizeSessaoDoFilmeEscolhido(int sizeSessaoDoFilmeEscolhido) {
+		this.sizeSessaoDoFilmeEscolhido = sizeSessaoDoFilmeEscolhido;
+	}
+
 	//dicPoltronasEscolhidas(idPoltrona: Integer; poltrona: Poltrona)
 	private Map <Integer, Poltrona> dicPoltronasEscolhidas = new HashMap<Integer, Poltrona>();
 	
@@ -80,7 +89,6 @@ public class Cartaz {
 			if (filmes[i] != null) {
 				if (filmes[i].getIdFilme() == idOriginalDoFilme) {
 					this.filmeEscolhido = filmes[i];
-					System.out.println(filmeEscolhido.getNomeFilme());
 				}
 			}
 		}
@@ -103,6 +111,10 @@ public class Cartaz {
 				break;
 			}
 		}
+	}
+
+	public Map<Integer, Poltrona> getDicPoltronasEscolhidas() {
+		return dicPoltronasEscolhidas;
 	}
 
 	public void setDicPoltronasEscolhidas(int idPoltrona) {
@@ -196,6 +208,7 @@ public class Cartaz {
 			}
 		}
 		System.out.println();
+		setSizeSessaoDoFilmeEscolhido(quantidadeSessoes);
 		return quantidadeSessoes;
 		
 	}

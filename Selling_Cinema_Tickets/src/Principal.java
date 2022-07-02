@@ -22,7 +22,6 @@ public class Principal {
 		Connection conn = null;
 		Filme[] filmes = comandosToBD.selectFilmes(conn);
 		if (filmes != null) {
-			System.out.println("yes");
 			try {
 				String url = "jdbc:sqlite:/home/gustavobraga/Downloads/TrabalhoFinal/TrabalhoFinalSIBD.db";
 				conn = DriverManager.getConnection(url);
@@ -81,7 +80,6 @@ public class Principal {
 						//IF Nº 2
 						if (resposta == 1) {
 							cartaz.detalhesDoFilmeEscolhido();
-							System.out.println("ues");
 							
 							{//Input Comprar ingresso ou Voltar para o inicio
 								String[] opcoes = {"Comprar ingresso","Cancelar"};
@@ -90,7 +88,8 @@ public class Principal {
 							}
 							
 							
-							int sizeSessoes=0;
+							int sizeSessoes=cartaz.getSizeSessaoDoFilmeEscolhido();
+							
 							//IF Nº 3
 							if (resposta == 1 & sizeSessoes > 0) {
 								interno:
@@ -120,6 +119,42 @@ public class Principal {
 										Boolean finalizarCompra = false;
 										Integer idDaPoltrona = null;
 										
+										{//Puxa a lista de poltronas que estao ocupadas da sessao escolhida
+											Sessao sessaoEscolhida = cartaz.getSessaoEscolhida();
+											int idSessaoEscolhida = sessaoEscolhida.getIdSessao();
+											
+											//Obs: So sera cadastro na tabela poltrona as poltronas que estao com status igual a true
+											//Contar o numero de poltronas com status iguais a true da sessao escolhida
+											PreparedStatement statement = conn.prepareStatement("Select count(*) From Poltrona Where idSessao = (?)");
+											statement.setInt(1, idSessaoEscolhida);
+											ResultSet rs = statement.executeQuery();
+											rs.next();
+											int numDePoltronas = rs.getInt(1);
+											
+											if (numDePoltronas > 0) {
+												Poltrona[] poltronas = new Poltrona[numDePoltronas];
+												
+												//Puxa as poltroas que estao com status igual a true
+												statement = conn.prepareStatement("Select * From Poltrona Where idSessao = (?)");
+												statement.setInt(1, idSessaoEscolhida);
+												rs = statement.executeQuery();
+												
+												int index = 0;
+												while(rs.next()) {
+													int idPoltrona = rs.getInt("idPoltrona");
+													String numPoltrona = rs.getString("numPoltrona");
+													//Como o valor da coluna statusPoltrona vai ser sempre igual a 1 (true)
+													//entao nao vamos puxar esse valor do BD
+													//int statusPoltrona = rs.getInt("statusPoltrona");
+													
+													poltronas[index] = new Poltrona();
+													poltronas[index].adicionarPoltrona(idPoltrona, numPoltrona);
+													index += 1;
+												}
+												
+												sessaoEscolhida.setStatusPoltrona(poltronas);
+											}
+										}
 										
 										interno2:
 										while (true) {
@@ -190,6 +225,25 @@ public class Principal {
 															
 															
 															System.out.println("Comprar realizada com sucesso");
+															
+															//Salvando as poltronas que foram compradas no BD
+															Map <Integer, Poltrona> dicPoltronasEscolhidas = cartaz.getDicPoltronasEscolhidas();
+															for (Integer key: dicPoltronasEscolhidas.keySet()) {
+																
+																int idPoltrona = dicPoltronasEscolhidas.get(key).getIdPoltrona();
+																String numPoltrona = dicPoltronasEscolhidas.get(key).getNumPoltrona();
+																int idSessao = cartaz.getSessaoEscolhida().getIdSessao();
+																
+																PreparedStatement statement = conn.prepareStatement("insert into Poltrona  values(?,?,1,?)");
+																statement.setInt(1, idPoltrona);
+																statement.setString(2, numPoltrona);
+																statement.setInt(3, idSessao);
+																statement.executeUpdate();
+																statement.close();
+																
+															}
+															
+															
 															
 															//Implementar funcionalidade de imprimir os tickets depois da compra ser efetuada
 															
