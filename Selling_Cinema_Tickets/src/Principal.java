@@ -45,7 +45,7 @@ public class Principal {
 					
 					{//Primeiro input. 
 						//A variavel opcoes contem os nomes que devem ser impressos para o usuário
-						String[] opcoes = {"Cliente","Administrador"};
+						String[] opcoes = {"Cliente","Administrador","Cadastrar Administrador"};
 						String mensagem = "-Ola, escolhar uma opcao abaixo. \n-E digite o numero da opcao:";
 						resposta = input.inputInt(opcoes, 0, mensagem);
 					}
@@ -328,12 +328,35 @@ public class Principal {
 						
 						
 					}else if (resposta == 2) {
-						/*Implmentar Funcionalidades do administrador
-						 *  -Cadastrar Filme
-						 *  -Deletar Filme
-						 *  -Criar Sessoes
-						 *  -Deletar Sessoes
-						 */
+						String nomeDeUser;
+						String senha;
+						
+						PreparedStatement statement3;
+						ResultSet rs;
+						loopADD:
+						while (true) {
+							{//Input do nomeDeUser do administrador
+								String mensagem = "Nome do usuario: ";
+								nomeDeUser = input.inputStr(mensagem);
+							}
+							{//Input do senha do administrador
+								String mensagem = "Senha: ";
+								senha = input.inputStr(mensagem);
+							}
+							statement3 = conn.prepareStatement("Select count(*) From Administrador Where nomeDeUser = (?) AND senha = (?)");
+							statement3.setString(1, nomeDeUser);
+							statement3.setString(2, senha);
+							rs = statement3.executeQuery();
+							rs.next();
+							
+							if (rs.getInt(1) == 1) {
+								break loopADD;
+							}
+							System.out.println("Usuario ou Senha invalida");
+						}
+						rs.close();
+						statement3.close();
+						
 						
 						System.out.println("____________________________________________________");
 						System.out.println("                                                    ");
@@ -537,8 +560,42 @@ public class Principal {
 							}	
 						}
 						
+					} else if (resposta == 3) {
+						String nome;
+						String cpf;
+						String nomeDeUser;
+						String senha;
+						
+						System.out.println("____________________________________________________");
+						System.out.println("                                                    ");
+						System.out.format("%38s", "Cadastrar Administrador\n");
+						System.out.println("____________________________________________________");
 						
 						
+						{//Input do nome do administrador
+							String mensagem = "Nome do administrador: ";
+							nome = input.inputStr(mensagem);
+						}
+						{//Input do cpf do administrador
+							String mensagem = "CPF: ";
+							cpf = input.inputStr(mensagem);
+						}
+						{//Input do nomeDeUser do administrador
+							String mensagem = "Nome do usuario: ";
+							nomeDeUser = input.inputStr(mensagem);
+						}
+						{//Input do senha do administrador
+							String mensagem = "Senha: ";
+							senha = input.inputStr(mensagem);
+						}
+						
+						PreparedStatement statement = conn.prepareStatement("insert into Administrador values(?,?,?,?)");
+						statement.setString(1, nome);
+						statement.setString(2, cpf);
+						statement.setString(3, nomeDeUser);
+						statement.setString(4, senha);
+						statement.executeUpdate();
+						statement.close();
 					}
 				}
 			} catch (SQLException e) {
