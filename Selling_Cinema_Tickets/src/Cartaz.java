@@ -46,6 +46,7 @@ public class Cartaz {
 		}
 	}
 	
+	//Remove 1 filme
 	public void removerFilme(int idFilme) {
 		for (int i = 0; i < 25; i++) {
 			if (filmes[i] != null) {
@@ -53,6 +54,15 @@ public class Cartaz {
 					filmes[i] = null;
 					break;
 				}
+			}
+		}
+	}
+	
+	//Remove todos os filmes
+	public void removerFilme() {
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] != null) {
+				filmes[i] = null;
 			}
 		}
 	}
@@ -74,6 +84,10 @@ public class Cartaz {
 				}
 			}
 		}
+	}
+
+	public Sessao getSessaoEscolhida() {
+		return sessaoEscolhida;
 	}
 
 	public void setSessaoEscolhida(int idSessao) {
@@ -164,7 +178,6 @@ public class Cartaz {
 		System.out.println("-Sessoes disponpiveis:");
 		int variavelSemUltilidade = listarSessoesDoFilmeEscolhido();
 		
-		
 		System.out.println("\n____________________________________________________\n");		
 	}
 	
@@ -173,15 +186,17 @@ public class Cartaz {
 		int quantidadeSessoes = 0;
 		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
 	
-					
 		for (Sessao ses: listaDeSessoes) {
-			quantidadeSessoes++;
-			int novoId = quantidadeSessoes;
-			dicIDSessao.put(novoId, ses.getIdSessao());
-			System.out.println( "    " + novoId +".  "+ ses.getData());
+			if (ses != null) {
+				quantidadeSessoes++;
+				int novoId = quantidadeSessoes;
+				dicIDSessao.put(novoId, ses.getIdSessao());
+				System.out.println( "    " + novoId +".  "+ ses.getData());
+			
+			}
 		}
 		System.out.println();
-		return listaDeSessoes.length;
+		return quantidadeSessoes;
 		
 	}
 
