@@ -36,6 +36,27 @@ public class Cartaz {
 		return filmes;
 	}
 
+	public void setFilmes(Filme filme) {
+		
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] == null) {
+				filmes[i] = filme;
+		        break;
+		    }
+		}
+	}
+	
+	public void removerFilme(int idFilme) {
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] != null) {
+				if (filmes[i].getIdFilme() == idFilme) {
+					filmes[i] = null;
+					break;
+				}
+			}
+		}
+	}
+	
 	public Filme getFilmeEscolhido() {
 		return filmeEscolhido;
 	}
@@ -49,6 +70,7 @@ public class Cartaz {
 			if (filmes[i] != null) {
 				if (filmes[i].getIdFilme() == idOriginalDoFilme) {
 					this.filmeEscolhido = filmes[i];
+					System.out.println(filmeEscolhido.getNomeFilme());
 				}
 			}
 		}
@@ -58,11 +80,11 @@ public class Cartaz {
 		//O idSessao passado como paramentro, na verdade e uma key do 
 		//dicionario dicIDSessao, onde seu valor e o verdadeiro id do sessao.
 		int idOriginalDaSessao = dicIDSessao.get(idSessao);
-		
+			
 		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
 					
 		for (Sessao ses: listaDeSessoes) {
-			if(ses.getIdSessao() == idSessao) {
+			if(ses.getIdSessao() == idOriginalDaSessao) {
 				this.sessaoEscolhida = ses;
 				break;
 			}
@@ -93,16 +115,6 @@ public class Cartaz {
 		//key=numPoltrona e values=idPoltrona
 		return numDasPoltronas;
 	}
-
-	public void setFilmes(Filme filme) {
-		
-		for (int i = 0; i < 25; i++) {
-			if (filmes[i] == null) {
-				filmes[i] = filme;
-		        break;
-		    }
-		}
-	}
 	
 	//Lista todos os filmes que estao em cartaz
 	public int listarFilmes() {
@@ -111,9 +123,7 @@ public class Cartaz {
 		dicPoltronasEscolhidas.clear();
 		
 		int quantidadeFilme = 0;
-		System.out.println("____________________________________________________");
-		System.out.println("                                                    ");
-		System.out.format("%52s","------------------Filmes em Cartaz------------------\n \n");
+		
 		System.out.format(" %-4s%-25s%-6s%-14s \n \n","ID","Nome","Tempo","Classificacao");
 		
 		for (int i = 0; i < 25; i++) {
@@ -130,7 +140,7 @@ public class Cartaz {
 		    }
 		}
 		
-		System.out.println("____________________________________________________\n");
+		
 		
 		//Esse valor int retornado e para o metodo inputInt() saber quais valores ele deve esperar do usuario
 		return quantidadeFilme;

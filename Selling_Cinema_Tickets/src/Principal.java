@@ -150,7 +150,11 @@ public class Principal {
 				
 				//IF Nº 1
 				if (resposta == 1) {
+					System.out.println("____________________________________________________");
+					System.out.println("                                                    ");
+					System.out.format("%52s","------------------Filmes em Cartaz------------------\n \n");
 					int quantidadeFilme = cartaz.listarFilmes();
+					System.out.println("____________________________________________________");
 					
 					{//Input que recebe o filme escolhido pelo user.
 						String[] opcoes = new String[0];
@@ -185,12 +189,12 @@ public class Principal {
 						if (resposta == 1) {
 							interno:
 							while (true) {
-								int respostaDoUser2;
-								int numDeSessoes = cartaz.listarSessoesDoFilmeEscolhido();
-								
 								System.out.println("____________________________________________________");
 								System.out.println("                                                    ");
 								System.out.format("%52s","------------------Lista de Sessoes------------------\n \n");
+								
+								int respostaDoUser2;
+								int numDeSessoes = cartaz.listarSessoesDoFilmeEscolhido();
 								
 								{//Input escolher sessao
 									String[] opcoes = new String[0];
@@ -209,7 +213,6 @@ public class Principal {
 								if (respostaDoUser2 == 1) { //Continuar
 									Boolean finalizarCompra = false;
 									Integer idDaPoltrona = null;
-									System.out.println(finalizarCompra);
 									
 									
 									interno2:
@@ -423,28 +426,41 @@ public class Principal {
 						statement.executeUpdate();
 						statement.close();
 					
-					}/*else if (resposta == 2) { //Deletar Filme
-						int iddeletar;
+					}else if (resposta == 2) { //Deletar Filme
+						int idDeletar;
 						
-						Statement statement = conn.createStatement();
-						ResultSet rs = statement.executeQuery("Select * From Filme");
-						System.out.println("\n-Filmes que estão em cartaz.");
-						while(rs.next()) {
-							int idFilme = rs.getInt("idfilme");
-							String nomeFilme = rs.getString("nome");
-							System.out.println("Nome do filme: " + nomeFilme + "       Id: " + idFilme + "\n");
+						System.out.println("____________________________________________________");
+						System.out.println("                                                    ");
+						System.out.format("%35s", "Deletar Filme\n");
+						System.out.println("____________________________________________________");
+						System.out.println("                                                    ");
+						System.out.format("%52s","--------------------Filmes em Cartaz----------------\n \n");
+						
+						int quantidadeFilme = cartaz.listarFilmes();						
+						
+						System.out.println("____________________________________________________");
+						
+						{//Input que recebe o filme que vai ser deletado.
+							String[] opcoes = new String[0];
+							String mensagem = "-Escolhar um dos filmes citadas acima para ser deletado. \n-E digite o id do Filme:";
+							idFilmeEscolhido = input.inputInt(opcoes, quantidadeFilme, mensagem);
+							cartaz.setFilmeEscolhido(idFilmeEscolhido);
+							System.out.println("ID do filme escolhido para ser deletado: " + idFilmeEscolhido);
 						}
-						System.out.println("-Digite o id do filme que deseja deletar: ");
-						Scanner i = new Scanner(System.in);
-						iddeletar = i.nextInt();
 						
-						PreparedStatement statement2 = conn.prepareStatement("Delete from Filme where idfilme = (?)");
-						statement2.setInt(1, iddeletar);
+						Filme filmeEscolhidoToDelete = cartaz.getFilmeEscolhido();
+						int idFilmeDelete = filmeEscolhidoToDelete.getIdFilme();
+						
+						
+						PreparedStatement statement2 = conn.prepareStatement("Delete from Filme where idfilme = ?");
+						statement2.setInt(1, idFilmeDelete);
 						statement2.executeUpdate();
 						
-						statement.close();
+						statement2.close();
+						
+						cartaz.removerFilme(idFilmeDelete);
 
-					}*/
+					}
 					
 					
 				}

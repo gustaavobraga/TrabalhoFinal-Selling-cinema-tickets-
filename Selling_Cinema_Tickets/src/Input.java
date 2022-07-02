@@ -56,6 +56,22 @@ public class Input {
 		}
 	}
 	
+	public int inputInt(String mensagem) {
+		int resposta;
+		while(true) {
+			try {
+				System.out.println(mensagem);
+				resposta = ler.nextInt();
+				
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um numero inteiro.");
+				ler.nextLine();
+			}
+		}
+	}
+	
 	public Integer inputStr(Map <String, Integer> numDasPoltronasLivres) {
 		//O parametro recebe uma key=numPoltrona e values=idPoltrona
 		String resposta = null;
@@ -78,35 +94,6 @@ public class Input {
 		}
 	}
 	
-	public String inputStrLogin() {
-		while(true) {
-			try {
-				String resposta = ler.next().toUpperCase().trim();
-				
-				return resposta;
-				
-			} catch( Exception var) {
-				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
-			}
-		}
-	}
-
-	public int inputInt(String mensagem) {
-		int resposta;
-		while(true) {
-			try {
-				System.out.println(mensagem);
-				resposta = ler.nextInt();
-				
-				return resposta;
-				
-			} catch( Exception var) {
-				System.out.println("\n-Valor invalido, informe um numero inteiro.");
-				ler.nextLine();
-			}
-		}
-	}
-	
 	public String inputStr(String mensagem) {
 		while(true) {
 			try {
@@ -120,6 +107,19 @@ public class Input {
 		}
 	}
 	
+	public String inputStrLogin() {
+		while(true) {
+			try {
+				String resposta = ler.next().toUpperCase().trim();
+				
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
+			}
+		}
+	}
+
 	public Double inputDouble(String mensagem) {
 		Double resposta;
 		while(true) {
