@@ -11,7 +11,7 @@ public class ComandosToBD {
 	
 	public Filme[] selectFilmes(Connection conn) {
 		try {
-			String url = "jdbc:sqlite:/home/gustavobraga/Downloads/TrabalhoFinal/TrabalhoFinalSIBD.db";
+			String url = "jdbc:sqlite:TrabalhoFinalSIBD.db";
 			conn = DriverManager.getConnection(url);
 			//Statement statement = conn.createStatement();
 

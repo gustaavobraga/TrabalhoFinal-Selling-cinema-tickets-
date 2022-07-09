@@ -23,7 +23,7 @@ public class Principal {
 		Filme[] filmes = comandosToBD.selectFilmes(conn);
 		if (filmes != null) {
 			try {
-				String url = "jdbc:sqlite:/home/gustavobraga/Downloads/TrabalhoFinal/TrabalhoFinalSIBD.db";
+				String url = "jdbc:sqlite:TrabalhoFinalSIBD.db";
 				conn = DriverManager.getConnection(url);
 				
 				//ADD os filmes ao cartaz
