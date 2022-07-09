@@ -3,7 +3,8 @@ import java.util.InputMismatchException;
 import java.util.Map; 
 
 public class Input {
-	Scanner ler = new Scanner(System.in);
+	private Scanner ler = new Scanner(System.in);
+	private Scanner ler2 = new Scanner(System.in);
 
 	public int inputInt(String[] opcoes, int quantidadeOpcoes , String mensagem) {
 		/*
@@ -55,6 +56,22 @@ public class Input {
 		}
 	}
 	
+	public int inputInt(String mensagem) {
+		int resposta;
+		while(true) {
+			try {
+				System.out.println(mensagem);
+				resposta = ler.nextInt();
+				
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um numero inteiro.");
+				ler.nextLine();
+			}
+		}
+	}
+	
 	public Integer inputStr(Map <String, Integer> numDasPoltronasLivres) {
 		//O parametro recebe uma key=numPoltrona e values=idPoltrona
 		String resposta = null;
@@ -77,6 +94,19 @@ public class Input {
 		}
 	}
 	
+	public String inputStr(String mensagem) {
+		while(true) {
+			try {
+				System.out.println(mensagem);
+				String resposta = ler2.nextLine();
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
+			}
+		}
+	}
+	
 	public String inputStrLogin() {
 		while(true) {
 			try {
@@ -89,5 +119,22 @@ public class Input {
 			}
 		}
 	}
+
+	public Double inputDouble(String mensagem) {
+		Double resposta;
+		while(true) {
+			try {
+				System.out.println(mensagem);
+				resposta = ler.nextDouble();
+				
+				return resposta;
+				
+			} catch( Exception var) {
+				System.out.println("\n-Valor invalido, informe um valor que seja valido.");
+				ler.nextLine();
+			}
+		}
+	}
+	
 }
 

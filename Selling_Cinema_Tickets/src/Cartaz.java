@@ -7,7 +7,7 @@ public class Cartaz {
 	 * Os IDs dos filmes nem sempre vao esta em uma ordem continua
 	   pois ao deletar um filme vai surgir uma descontinuidade ate 
 	   que a posicao seja preenchida novamente com outro filme.
-	 * Logo NaO vamos imprimir essa bagunca de IDs para o usuario.
+	 * Logo Nao vamos imprimir essa bagunca de IDs para o usuario.
 	 * Para resolver esse problema vamos criar novos IDs temporarios.
 	 * Para isso vamos criar um dicionario onde as KEYs desse 
 	   dicionario vao ser os novos IDs que vao ser IMPRESSOS
@@ -19,30 +19,71 @@ public class Cartaz {
 	 * Dessa forma a impressao dos IDs vai ficar atualizada mesmo 
 	   se um filme for deletado.
 	 */ 
-	private Map <Integer, Integer> dicID = new HashMap<Integer,Integer>();
+	private Map <Integer, Integer> dicIDFilme = new HashMap<Integer,Integer>();
+	private Map <Integer, Integer> dicIDSessao = new HashMap<Integer,Integer>();
 	private Map <String, Integer> dicPoltronas = new HashMap<String, Integer>();
+	//dicPoltronasEscolhidas(idPoltrona: Integer; poltrona: Poltrona)
+	private Map <Integer, Poltrona> dicPoltronasEscolhidas = new HashMap<Integer, Poltrona>();	
 	
 	//OBS:Resolver bud dos IDs das sessoes: A impressao dos IDs das sessoes tem o mesmo problema dos IDs dos filmes.
 	//Map <Integer, Integer> dicSessoes = new HashMap<Integer,Integer>();
 	
 	private Filme filmeEscolhido;
 	private Sessao sessaoEscolhida;
+	private int sizeSessaoDoFilmeEscolhido;
 	
-	//dicPoltronasEscolhidas(idPoltrona: Integer; poltrona: Poltrona)
-	private Map <Integer, Poltrona> dicPoltronasEscolhidas = new HashMap<Integer, Poltrona>();
+	public int getSizeSessaoDoFilmeEscolhido() {
+		return sizeSessaoDoFilmeEscolhido;
+	}
+
+	public void setSizeSessaoDoFilmeEscolhido(int sizeSessaoDoFilmeEscolhido) {
+		this.sizeSessaoDoFilmeEscolhido = sizeSessaoDoFilmeEscolhido;
+	}
+
 	
 	public Filme[] getFilmes() {
 		return filmes;
 	}
 
+	public void setFilmes(Filme filme) {
+		
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] == null) {
+				filmes[i] = filme;
+		        break;
+		    }
+		}
+	}
+	
+	//Remove 1 filme
+	public void removerFilme(int idFilme) {
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] != null) {
+				if (filmes[i].getIdFilme() == idFilme) {
+					filmes[i] = null;
+					break;
+				}
+			}
+		}
+	}
+	
+	//Remove todos os filmes
+	public void removerFilme() {
+		for (int i = 0; i < 25; i++) {
+			if (filmes[i] != null) {
+				filmes[i] = null;
+			}
+		}
+	}
+	
 	public Filme getFilmeEscolhido() {
 		return filmeEscolhido;
 	}
 
 	public void setFilmeEscolhido(int idFilme) {
 		//O idFilme passado como paramentro, na verdade e uma key do 
-		//dicionario dic, onde seu valor e o verdadeiro id do filme.
-		int idOriginalDoFilme = dicID.get(idFilme);
+		//dicionario dicIDFilme, onde seu valor e o verdadeiro id do filme.
+		int idOriginalDoFilme = dicIDFilme.get(idFilme);
 		
 		for (int i = 0; i < 25; i++) {
 			if (filmes[i] != null) {
@@ -53,15 +94,27 @@ public class Cartaz {
 		}
 	}
 
+	public Sessao getSessaoEscolhida() {
+		return sessaoEscolhida;
+	}
+
 	public void setSessaoEscolhida(int idSessao) {
+		//O idSessao passado como paramentro, na verdade e uma key do 
+		//dicionario dicIDSessao, onde seu valor e o verdadeiro id do sessao.
+		int idOriginalDaSessao = dicIDSessao.get(idSessao);
+			
 		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
 					
 		for (Sessao ses: listaDeSessoes) {
-			if(ses.getIdSessao() == idSessao) {
+			if(ses.getIdSessao() == idOriginalDaSessao) {
 				this.sessaoEscolhida = ses;
 				break;
 			}
 		}
+	}
+
+	public Map<Integer, Poltrona> getDicPoltronasEscolhidas() {
+		return dicPoltronasEscolhidas;
 	}
 
 	public void setDicPoltronasEscolhidas(int idPoltrona) {
@@ -88,27 +141,15 @@ public class Cartaz {
 		//key=numPoltrona e values=idPoltrona
 		return numDasPoltronas;
 	}
-
-	public void setFilmes(Filme filme) {
-		
-		for (int i = 0; i < 25; i++) {
-			if (filmes[i] == null) {
-				filmes[i] = filme;
-		        break;
-		    }
-		}
-	}
 	
 	//Lista todos os filmes que estao em cartaz
 	public int listarFilmes() {
-		dicID.clear();
+		dicIDFilme.clear();
 		dicPoltronas.clear();
 		dicPoltronasEscolhidas.clear();
 		
 		int quantidadeFilme = 0;
-		System.out.println("____________________________________________________");
-		System.out.println("                                                    ");
-		System.out.format("%52s","------------------Filmes em Cartaz------------------\n \n");
+		
 		System.out.format(" %-4s%-25s%-6s%-14s \n \n","ID","Nome","Tempo","Classificacao");
 		
 		for (int i = 0; i < 25; i++) {
@@ -120,12 +161,12 @@ public class Cartaz {
 				System.out.format("%-6s", filmes[i].getTempoFilme());
 				System.out.format("%-14s\n", filmes[i].getClassificacaoIdade());
 				
-				dicID.put(quantidadeFilme, filmes[i].getIdFilme());
+				dicIDFilme.put(quantidadeFilme, filmes[i].getIdFilme());
 				
 		    }
 		}
 		
-		System.out.println("____________________________________________________\n");
+		
 		
 		//Esse valor int retornado e para o metodo inputInt() saber quais valores ele deve esperar do usuario
 		return quantidadeFilme;
@@ -147,25 +188,28 @@ public class Cartaz {
 		System.out.format("%s%-20s\n", "-Tempo: ", filmeEscolhido.getTempoFilme());
 		System.out.format("%s%-20s\n", "-Valor: ", filmeEscolhido.getValorFilme());
 		System.out.println("-Sessoes disponpiveis:");
-		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
-		for (Sessao ses: listaDeSessoes) {
-			System.out.println( "    " + ses.getIdSessao() +"  "+ ses.getData());
-		}
+		int variavelSemUltilidade = listarSessoesDoFilmeEscolhido();
+		
 		System.out.println("\n____________________________________________________\n");		
 	}
 	
 	public int listarSessoesDoFilmeEscolhido() {
+		dicIDSessao.clear();
+		int quantidadeSessoes = 0;
 		Sessao[] listaDeSessoes = filmeEscolhido.getSessoes();
-		
-		System.out.println("____________________________________________________");
-		System.out.println("                                                    ");
-		System.out.format("%52s","------------------Lista de Sessoes------------------\n \n");
-					
+	
 		for (Sessao ses: listaDeSessoes) {
-			System.out.println( "    " + ses.getIdSessao() +".  "+ ses.getData());
+			if (ses != null) {
+				quantidadeSessoes++;
+				int novoId = quantidadeSessoes;
+				dicIDSessao.put(novoId, ses.getIdSessao());
+				System.out.println( "    " + novoId +".  "+ ses.getData());
+			
+			}
 		}
 		System.out.println();
-		return listaDeSessoes.length;
+		setSizeSessaoDoFilmeEscolhido(quantidadeSessoes);
+		return quantidadeSessoes;
 		
 	}
 
@@ -174,7 +218,6 @@ public class Cartaz {
 		String[] xx = new String[5];
 		int indice = 0;
 		
-		listaDePoltronas[3].setStatusPoltrona(true);
 		
 		while (true) {
 			for (int i=0; i<5; i++) {

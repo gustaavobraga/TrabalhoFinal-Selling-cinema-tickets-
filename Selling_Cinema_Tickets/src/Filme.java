@@ -1,5 +1,5 @@
 
-public class Filme extends Sessao {
+public class Filme{
 	
 	private int idFilme;
 	private String nomeFilme;
@@ -77,10 +77,17 @@ public class Filme extends Sessao {
 		setTempoFilme(tempoFilme);
 		setClassificacaoIdade(classificaçãoIdade);
 		setSessoes(sessoes);
-
-		
 	}
 	
+	public void adicionarFilme(int idFilme, String nomeFilme,  double valorFilme, 
+			   String tempoFilme, int classificaçãoIdade) {
+		setNomeFilme(nomeFilme);
+		setIdFilme(idFilme);
+		setValorFilme(valorFilme);
+		setTempoFilme(tempoFilme);
+		setClassificacaoIdade(classificaçãoIdade);
+	}	
+		
 	public String verFilme() {
 		String informacoes = "Nome: " + this.getNomeFilme() + "\nValor: " + this.getValorFilme() + " reais";
 		return informacoes;
