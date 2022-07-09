@@ -209,22 +209,25 @@ public class Principal {
 															System.out.println("Informe alguns dados, para podermos finalizar a compra.");
 															System.out.print("Nome Completo: ");
 															String nomeCliente = input.inputStrLogin();
-															System.out.print("Data de Nascimento: ");
+															System.out.print("\nData de Nascimento: ");
 															String dataCliente = input.inputStrLogin();
-															System.out.print("CPF: ");
+															System.out.print("\nCPF: ");
 															String cpfCliente = input.inputStrLogin();
+															System.out.print("\nEmail: ");
+															String emailCliente = input.inputStrLogin();
 															
-															Cliente cliente1 = new Cliente(nomeCliente, cpfCliente, dataCliente);
+															Cliente cliente1 = new Cliente(nomeCliente, cpfCliente, dataCliente, emailCliente);
 															
-															System.out.print("Numero do Cartao de Credito: ");
+															System.out.print("\nNumero do Cartao de Credito: ");
 															String numeroCartao = input.inputStrLogin();
-															System.out.print("Vencimento do Cartao de Credito: ");
+															System.out.print("\nVencimento do Cartao de Credito: ");
 															String vencimentoCartao = input.inputStrLogin();
-															System.out.print("CVV do Cartao de Credito: ");
+															System.out.print("\nCVV do Cartao de Credito: ");
 															String cvvCartao = input.inputStrLogin();
 															
 															
-															System.out.println("Comprar realizada com sucesso");
+															System.out.println("Compra realizada com sucesso");
+															System.out.println("Os ingressos foram enviados para o seu email.");
 															
 															//Salvando as poltronas que foram compradas no BD
 															Map <Integer, Poltrona> dicPoltronasEscolhidas = cartaz.getDicPoltronasEscolhidas();
@@ -234,7 +237,7 @@ public class Principal {
 																String numPoltrona = dicPoltronasEscolhidas.get(key).getNumPoltrona();
 																int idSessao = cartaz.getSessaoEscolhida().getIdSessao();
 																
-																PreparedStatement statement = conn.prepareStatement("insert into Poltrona  values(?,?,1,?)");
+																PreparedStatement statement = conn.prepareStatement("insert into Poltrona (idPoltrona, numPoltrona, statusPoltrona, idSessao) values(?,?,1,?)");
 																statement.setInt(1, idPoltrona);
 																statement.setString(2, numPoltrona);
 																statement.setInt(3, idSessao);
@@ -243,9 +246,6 @@ public class Principal {
 																
 															}
 															
-															
-															
-															//Implementar funcionalidade de imprimir os tickets depois da compra ser efetuada
 															
 														} else if(resposta == 2) {//Cancelar compra
 															break interno;
@@ -365,7 +365,7 @@ public class Principal {
 						
 						{//Primeiro input do ADD 
 							//A variavel opcoes contem os nomes que devem ser impressos para o usuario
-							String[] opcoes = {"Cadastrar Filme", "Deletar Filme", "Cadastrar Sessao", "Deletar Sessao"};
+							String[] opcoes = {"Cadastrar Filme", "Deletar Filme", "Cadastrar Sessao", "Deletar Sessao","Atualizar Sessao"};
 							String mensagem = "\n-Escolha uma das opcoes abaixo. \n-E digite o numero da opcao: ";
 							resposta = input.inputInt(opcoes, 0, mensagem);
 						}
@@ -445,8 +445,11 @@ public class Principal {
 							Filme filmeEscolhidoToDelete = cartaz.getFilmeEscolhido();
 							int idFilmeDelete = filmeEscolhidoToDelete.getIdFilme();
 							
+							PreparedStatement statement2 = conn.prepareStatement("Delete from Sessao where idfilme = ?");
+							statement2.setInt(1, idFilmeDelete);
+							statement2.executeUpdate();
 							
-							PreparedStatement statement2 = conn.prepareStatement("Delete from Filme where idfilme = ?");
+							statement2 = conn.prepareStatement("Delete from Filme where idfilme = ?");
 							statement2.setInt(1, idFilmeDelete);
 							statement2.executeUpdate();
 							
@@ -483,7 +486,7 @@ public class Principal {
 								String mensagem = "Digite a data da sessao (0:00h DD/MM): ";
 								dataSessao = input.inputStr(mensagem);
 							}
-							{//Input da data da sessao
+							{//Input do endereço da sessao
 								String mensagem = "Digite o endereco da sala da sessao: ";
 								localSessao = input.inputStr(mensagem);
 							}
@@ -533,7 +536,7 @@ public class Principal {
 							
 							int sizeSessoes = cartaz.listarSessoesDoFilmeEscolhido();
 							
-							{//Input que recebe o filme que vai ter a sessao deletada.
+							{//Input que recebe a sessao que vai ser deletada.
 								String[] opcoes = new String[0];
 								String mensagem = "-Escolhar uma sessao acima para ser deletada. \n-E digite o id da sessao:";
 								idSessaoDelete = input.inputInt(opcoes, sizeSessoes, mensagem);
@@ -558,6 +561,73 @@ public class Principal {
 							for(Filme i: filmes) {
 								cartaz.setFilmes(i);
 							}	
+						}else if (resposta == 5) {//Atualizar Sessao
+							////////////////////////////////////////////////////////q
+							int idSessaoUpdate;
+							System.out.println("____________________________________________________");
+							System.out.println("                                                    ");
+							System.out.format("%35s", "Atualizar Sessao0\n");
+							System.out.println("____________________________________________________");
+							System.out.println("                                                    ");
+							System.out.format("%52s","--------------------Filmes em Cartaz----------------\n \n");
+							
+							int quantidadeFilme = cartaz.listarFilmes();						
+							
+							System.out.println("____________________________________________________");
+							
+							{//Input que recebe o filme que vai ter a sessao atualizada.
+								String[] opcoes = new String[0];
+								String mensagem = "-Escolhar um filme acima para atualizar uma sessao. \n-E digite o id do Filme:";
+								idFilmeEscolhido = input.inputInt(opcoes, quantidadeFilme, mensagem);
+								cartaz.setFilmeEscolhido(idFilmeEscolhido);
+							}
+							
+							System.out.println("____________________________________________________");
+							System.out.println("                                                    ");
+							System.out.format("%52s","------------------Lista de Sessoes------------------\n \n");
+							
+							int sizeSessoes = cartaz.listarSessoesDoFilmeEscolhido();
+							
+							{//Input que recebe a sessao que vai ser atualizada.
+								String[] opcoes = new String[0];
+								String mensagem = "-Escolhar uma sessao acima para ser atualizada. \n-E digite o id da sessao:";
+								idSessaoUpdate = input.inputInt(opcoes, sizeSessoes, mensagem);
+								cartaz.setSessaoEscolhida(idSessaoUpdate);
+							}
+							
+							String dataSessao;
+							String localSessao;
+							
+							{//Input da data da sessao
+								String mensagem = "Digite uma nova data para a sessao (0:00h DD/MM): ";
+								dataSessao = input.inputStr(mensagem);
+							}
+							{//Input do endereço da sessao
+								String mensagem = "Digite um novo endereco da sala para sessao: ";
+								localSessao = input.inputStr(mensagem);
+							}
+							
+							Sessao sessaoUpdate = cartaz.getSessaoEscolhida();
+							idSessaoUpdate = sessaoUpdate.getIdSessao();
+							
+							PreparedStatement statement = conn.prepareStatement("update Sessao set data=?, local=? where idsessao = (?)");
+							statement.setString(1, dataSessao);
+							statement.setString(2, localSessao);
+							statement.setInt(3, idSessaoUpdate);
+							statement.executeUpdate();
+							statement.close();
+							
+							//Puxa a lista de filmes do BD atualizada com a nova sessao
+							filmes = comandosToBD.selectFilmes(conn);
+							
+							//Apagar os filmes que estao no cartaz
+							cartaz.removerFilme();
+							
+							//ADD os novos filmes ao cartaz
+							for(Filme i: filmes) {
+								cartaz.setFilmes(i);
+							}
+							
 						}
 						
 					} else if (resposta == 3) {

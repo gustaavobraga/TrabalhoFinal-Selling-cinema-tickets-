@@ -3,8 +3,8 @@ import java.util.InputMismatchException;
 import java.util.Map; 
 
 public class Input {
-	Scanner ler = new Scanner(System.in);
-	Scanner ler2 = new Scanner(System.in);
+	private Scanner ler = new Scanner(System.in);
+	private Scanner ler2 = new Scanner(System.in);
 
 	public int inputInt(String[] opcoes, int quantidadeOpcoes , String mensagem) {
 		/*

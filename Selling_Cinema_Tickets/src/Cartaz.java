@@ -22,6 +22,8 @@ public class Cartaz {
 	private Map <Integer, Integer> dicIDFilme = new HashMap<Integer,Integer>();
 	private Map <Integer, Integer> dicIDSessao = new HashMap<Integer,Integer>();
 	private Map <String, Integer> dicPoltronas = new HashMap<String, Integer>();
+	//dicPoltronasEscolhidas(idPoltrona: Integer; poltrona: Poltrona)
+	private Map <Integer, Poltrona> dicPoltronasEscolhidas = new HashMap<Integer, Poltrona>();	
 	
 	//OBS:Resolver bud dos IDs das sessoes: A impressao dos IDs das sessoes tem o mesmo problema dos IDs dos filmes.
 	//Map <Integer, Integer> dicSessoes = new HashMap<Integer,Integer>();
@@ -38,8 +40,6 @@ public class Cartaz {
 		this.sizeSessaoDoFilmeEscolhido = sizeSessaoDoFilmeEscolhido;
 	}
 
-	//dicPoltronasEscolhidas(idPoltrona: Integer; poltrona: Poltrona)
-	private Map <Integer, Poltrona> dicPoltronasEscolhidas = new HashMap<Integer, Poltrona>();
 	
 	public Filme[] getFilmes() {
 		return filmes;
@@ -218,7 +218,6 @@ public class Cartaz {
 		String[] xx = new String[5];
 		int indice = 0;
 		
-		listaDePoltronas[3].setStatusPoltrona(true);
 		
 		while (true) {
 			for (int i=0; i<5; i++) {
